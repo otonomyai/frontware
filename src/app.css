@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@layer base {
+  @font-face {
+    font-family: "Minecraft";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/fonts/Minecraft.ttf") format("truetype");
+  }
+
+  html,
+  body {
+    font-family: "Minecraft", Arial, sans-serif;
+  }
+}
+
+.app__warpper {
+  width: 100%;
+  height: 100vh;
+}
+
+:root {
+  --primary-clr: #1e375c;
+  --secondary-clr: #8e8e8e;
+
+  --text-d-gray: #656363;
+  --text-l-gray: #939393;
+
+  --bg-input-gray: #d9d9d94f;
+}
