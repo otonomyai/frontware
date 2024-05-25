@@ -1,15 +1,12 @@
 <script>
-  import Button from "$lib/components/button.svelte";
+  import Button from "$lib/components/ui/button.svelte";
+  import Header from "$lib/components/ui/header.svelte";
 </script>
 
-<div class="flex py-5 px-4 md:p-10 flex-col gap-9">
-  <div class="flex w-full justify-between items-center">
-    <span class="flex flex-col">
-      <h1 class="text-2xl md:text-6xl text-primary">kino-tekina</h1>
-      <p class="text-lg md:text-4xl text-secondary">functional stuff</p>
-    </span>
-    <p class="text-lg md:text-7xl text-primary">Checkout</p>
-  </div>
+<div class="max-w-[1280px] mx-auto flex py-5 px-4 md:p-10 flex-col gap-9">
+  <Header action={() => {}}>
+    <p class="text-lg md:text-4xl text-primary">Checkout</p>
+  </Header>
 
   <div class="flex flex-col w-full md:w-9/12 gap-6 md:gap-10">
     <div class="flex flex-col gap-4 w-full">
