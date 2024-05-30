@@ -35,7 +35,7 @@
 
 
     </div>
-    <Button text="ADD TO CART" />
+    <Button text="comming soon" />
   </div>
 
 
