@@ -1,5 +1,11 @@
 {
 	"/": [],
 	"/checkout": [],
+	"/login": [
+		"src/routes/login/+page.ts"
+	],
+	"/oauth": [
+		"src/routes/oauth/+page.ts"
+	],
 	"/summary": []
 }
