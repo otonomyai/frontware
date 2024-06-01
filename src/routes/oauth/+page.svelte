@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { addUser } from "$lib/apis";
+  import { addUser } from "$lib/apis/user";
   import { useMutation } from "@sveltestack/svelte-query";
   import { onMount } from "svelte";
   import type { Session } from "@supabase/supabase-js";
@@ -14,6 +14,7 @@
       const email = user.email || "";
       const fullName = user.user_metadata?.full_name || "";
       const [first_name = "", last_name = ""] = fullName.split(" ");
+
       return addUser({
         email,
         first_name,

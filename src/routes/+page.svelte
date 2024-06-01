@@ -3,6 +3,7 @@
   import Productcard from "$lib/components/ui/productcard.svelte";
   import Header from "$lib/components/ui/header.svelte";
   import Physicsball from "$lib/components/ui/physicsball.svelte";
+  import { useQuery } from "@sveltestack/svelte-query/dist/query/useQuery";
 </script>
 
 <div class="header">
