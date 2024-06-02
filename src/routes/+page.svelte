@@ -1,10 +1,11 @@
-<script>
+<script lang="ts">
   import Icon from "@iconify/svelte";
   import Productcard from "$lib/components/ui/productcard.svelte";
   import Header from "$lib/components/ui/header.svelte";
   import Physicsball from "$lib/components/ui/physicsball.svelte";
   import { useQuery } from "@sveltestack/svelte-query";
   import { getProduct } from "$lib/apis/product";
+  import type { ProductData, ProductResponse } from "$lib/apis/product";
 
   const productId = "665b2ea351c9fe7ffcc15efc";
 
@@ -29,7 +30,9 @@
     <Physicsball />
   </div>
   <div class="product">
-    <Productcard {productData} />
+    {#if $productData?.data?.data?._id}
+      <Productcard productData={$productData?.data} />
+    {/if}
   </div>
 </div>
 

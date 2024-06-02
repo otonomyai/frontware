@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import Button from "$lib/components/ui/button.svelte";
 </script>
 
@@ -24,7 +24,7 @@
     </span>
   </div>
   <div class="flex flex-col gap-3 justify-center items-center">
-    <Button text="Checkout" />
+    <Button text="Checkout" callback={() => {}} />
     <p class="text-lg text-gray-400">Secure Checkout</p>
   </div>
 </div>

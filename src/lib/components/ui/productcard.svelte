@@ -1,33 +1,49 @@
-<script>
+<script lang="ts">
   import Button from "$lib/components/ui/button.svelte";
+  import type { ProductData } from "$lib/apis/product";
+  import { cart } from "$lib/store/localStorageStore";
+  import { goto } from "$app/navigation";
 
-  export let productData;
+  export let productData: { data: ProductData };
 
-  $: console.log("productData", $productData?.data?.data?.images);
+  $: console.log("ProductData", productData);
+
+  function addToCart(product: ProductData) {
+    console.log("Product added to cart");
+    cart.update((items: ProductData[]) => {
+      const existingProduct = items.find((item) => item._id === product._id);
+      if (existingProduct) {
+        existingProduct.stock += 1;
+      } else {
+        items.push({ ...product, stock: 1 });
+      }
+      return items;
+    });
+
+    console.log("Product added to cart");
+    goto("/summary");
+  }
 </script>
 
 <div class="product">
-  <img
-    src={$productData?.data?.data?.images[0]}
-    alt={$productData?.data?.data?.name}
-  />
-  <div class="productinfo">
-    <div class="productname">{$productData?.data?.data?.name}</div>
-    <div class="flex justify-between items-start">
-      <div class="productdesc">
-        {$productData?.data?.data?.description}
-      </div>
-      <div class="leftinstock">
-        <strong>
-          {$productData?.data?.data?.stock} left
-        </strong>
+  {#if productData?.data}
+    <img src={productData.data.images[0]} alt={productData.data.name} />
+    <div class="productinfo">
+      <div class="productname">{productData.data.name}</div>
+      <div class="flex justify-between items-start">
+        <div class="productdesc">
+          {productData.data.description}
+        </div>
+        <div class="leftinstock">
+          <strong>{productData.data.stock} left</strong>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="text-2xl text-gray-800 mt-8">
-    ${$productData?.data?.data?.price}
-  </div>
-  <Button text="ADD TO CART" />
+    <div class="text-2xl text-gray-800 mt-8">
+      ${productData.data.price}
+    </div>
+    <Button text="ADD TO CART" callback={() => addToCart(productData.data)} />
+  {/if}
 </div>
 
 <style>
@@ -37,8 +53,6 @@
     align-items: start;
     margin-top: 35px;
     background-color: transparent;
-
-    /* border: red dashed 1px; */
     position: absolute;
     right: 40px;
     top: 80px;
@@ -49,7 +63,6 @@
     background-color: rgb(255, 210, 210);
     font-family: "Minecraft", Arial, sans-serif;
     color: #d95f5f;
-
     padding: 10px;
     border-radius: 7px;
   }
@@ -64,7 +77,6 @@
     font-family: "Minecraft", Arial, sans-serif;
     margin-top: 5px;
     width: 400px;
-
     font-size: 25px;
     color: #7f7d7d;
   }
@@ -77,7 +89,6 @@
 
   .product img {
     max-width: 600px;
-
     border-radius: 51px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }

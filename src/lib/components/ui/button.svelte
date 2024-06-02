@@ -1,10 +1,11 @@
 <script>
   export let text = "ADD TO CART";
+  export let callback;
 </script>
 
 <div class="spacer"></div>
 
-<button class="button">{text}</button>
+<button class="button" on:click={callback}>{text}</button>
 
 <style>
   :root {
