@@ -18,16 +18,12 @@ export interface ProductResponse {
   message: string;
 }
 
-export interface ProductRequest {
-  productId: string;
-}
-
 export const getProduct = async (
-  productId: ProductRequest
+  productId: string
 ): Promise<ProductResponse> => {
   try {
     const response = await api.get<ProductResponse>(
-      `/product/get:${productId}`
+      `/product/get/${productId}`
     );
     return response.data;
   } catch (error) {

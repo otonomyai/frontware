@@ -3,7 +3,14 @@
   import Productcard from "$lib/components/ui/productcard.svelte";
   import Header from "$lib/components/ui/header.svelte";
   import Physicsball from "$lib/components/ui/physicsball.svelte";
-  import { useQuery } from "@sveltestack/svelte-query/dist/query/useQuery";
+  import { useQuery } from "@sveltestack/svelte-query";
+  import { getProduct } from "$lib/apis/product";
+
+  const productId = "665b2ea351c9fe7ffcc15efc";
+
+  const productData = useQuery(["product", productId], () =>
+    getProduct(productId)
+  );
 </script>
 
 <div class="header">
@@ -22,7 +29,7 @@
     <Physicsball />
   </div>
   <div class="product">
-    <Productcard />
+    <Productcard {productData} />
   </div>
 </div>
 

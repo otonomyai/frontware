@@ -1,28 +1,31 @@
 <script>
   import Button from "$lib/components/ui/button.svelte";
-  // Placeholder data for the product
-  let product = {
-    name: "inflated pot kit ",
-    price: "$0.00",
-    description: "3d printed inflated pot with soft textures",
-    imageUrl: "/circle 1.png",
-    stockleft: 15,
-  };
+
+  export let productData;
+
+  $: console.log("productData", $productData?.data?.data?.images);
 </script>
 
 <div class="product">
-  <img src={product.imageUrl} alt={product.name} />
+  <img
+    src={$productData?.data?.data?.images[0]}
+    alt={$productData?.data?.data?.name}
+  />
   <div class="productinfo">
-    <div class="productname">{product.name}</div>
-    <div class="productdesc">
-      {product.description}
+    <div class="productname">{$productData?.data?.data?.name}</div>
+    <div class="flex justify-between items-start">
+      <div class="productdesc">
+        {$productData?.data?.data?.description}
+      </div>
+      <div class="leftinstock">
+        <strong>
+          {$productData?.data?.data?.stock} left
+        </strong>
+      </div>
     </div>
-
-    <div class="leftinstock">
-      <strong>
-        {product.stockleft} left
-      </strong>
-    </div>
+  </div>
+  <div class="text-2xl text-gray-800 mt-8">
+    ${$productData?.data?.data?.price}
   </div>
   <Button text="ADD TO CART" />
 </div>
@@ -43,18 +46,12 @@
   }
 
   .leftinstock {
-    position: absolute;
     background-color: rgb(255, 210, 210);
     font-family: "Minecraft", Arial, sans-serif;
     color: #d95f5f;
 
-    height: 15px;
     padding: 10px;
     border-radius: 7px;
-
-    width: 50px;
-    bottom: 150px;
-    right: 30px;
   }
 
   .productname {
