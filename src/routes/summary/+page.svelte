@@ -6,6 +6,10 @@
   import { cart } from "$lib/store/localStorageStore";
   import { get } from "svelte/store";
 
+  export let data;
+
+  $: ({ session } = data);
+
   const items = Array(4).fill({});
 
   // Use the $ prefix to access the store value reactively
@@ -13,8 +17,6 @@
 
   // Optionally, use the store directly to get the initial value
   const initialCartItems = get(cart);
-
-  $: console.log("initialCartItems", initialCartItems);
 </script>
 
 <div class="max-w-[1280px] mx-auto flex py-5 px-4 gap-8 md:p-10 flex-col">
@@ -37,7 +39,7 @@
       {/each}
     </div>
     <div class="w-4/12">
-      <Summary />
+      <Summary {session} />
     </div>
   </div>
 </div>

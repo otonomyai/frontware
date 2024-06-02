@@ -11,7 +11,7 @@ export interface UserData {
   email: string;
 }
 
-export interface BrokersConnectionResponse {
+export interface addUserResponse {
   status: string;
   data: UserData;
   message: string;
@@ -25,15 +25,12 @@ export interface AddUserRequest {
 
 export const addUser = async (
   userData: AddUserRequest
-): Promise<BrokersConnectionResponse> => {
+): Promise<addUserResponse> => {
   try {
-    const response = await api.post<BrokersConnectionResponse>(
-      `/user/add`,
-      userData
-    );
+    const response = await api.post<addUserResponse>(`/user/add`, userData);
     return response.data;
   } catch (error) {
-    console.error("Failed to fetch day summary:", error);
+    console.error("Failed to add user:", error);
     throw error;
   }
 };

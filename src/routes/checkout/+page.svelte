@@ -78,6 +78,6 @@
         </div>
       </div>
     </div>
-    <Button text="Place order & pay" />
+    <Button text="Place order & pay" callback={() => {}} />
   </div>
 </div>

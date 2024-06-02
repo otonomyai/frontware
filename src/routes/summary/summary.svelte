@@ -1,5 +1,16 @@
 <script lang="ts">
+  import { addOrder } from "$lib/apis/order";
   import Button from "$lib/components/ui/button.svelte";
+  import type { Session } from "@supabase/supabase-js";
+  import { useMutation } from "@sveltestack/svelte-query";
+
+  export let session: Session;
+
+  // const mutation = useMutation(async (data) => {
+  //   return addOrder({
+  //     user:
+  //   })
+  // });
 </script>
 
 <div class="w-full bg-gray-100 rounded-md p-4 flex flex-col gap-8">

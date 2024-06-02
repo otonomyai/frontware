@@ -1,5 +1,6 @@
 <script>
-  import { supabase } from "$lib/utils/supbase";
+  export let data;
+  $: ({ supabase } = data);
 
   const signInWithGoogle = async () => {
     try {
@@ -9,13 +10,9 @@
           redirectTo: "http://localhost:5173/oauth",
         },
       });
-      if (error) {
-        console.error("Error during sign-in:", error.message);
-      } else {
-        console.log("Sign-in successful");
-      }
-    } catch (error) {
-      console.error("Unexpected error:", error);
+      if (error) console.error(error);
+    } catch (err) {
+      console.error(err);
     }
   };
 </script>

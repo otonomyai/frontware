@@ -3,7 +3,10 @@
   import { useMutation } from "@sveltestack/svelte-query";
   import { onMount } from "svelte";
   import type { Session } from "@supabase/supabase-js";
-  import { supabase } from "$lib/utils/supbase";
+
+  export let data;
+
+  $: ({ session } = data);
 
   // Define the mutation
   const mutation = useMutation(
@@ -28,22 +31,10 @@
     }
   );
 
-  const getSession = async () => {
-    const { data, error } = await supabase.auth.getSession();
-    if (error) {
-      console.error("Error getting session:", error);
-      return;
-    }
-
-    if (typeof window !== "undefined" && data.session?.access_token) {
-      localStorage.setItem("token", data.session.access_token);
-    }
-
-    // Trigger the.session.access_token);
-    $mutation.mutate({ session: data.session });
-  };
-
   onMount(() => {
-    getSession();
+    if (typeof window !== "undefined" && session?.access_token) {
+      localStorage.setItem("token", session?.access_token);
+    }
+    $mutation.mutate({ session });
   });
 </script>
