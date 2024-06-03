@@ -6,10 +6,7 @@
 
   export let productData: { data: ProductData };
 
-  $: console.log("ProductData", productData);
-
   function addToCart(product: ProductData) {
-    console.log("Product added to cart");
     cart.update((items: ProductData[]) => {
       const existingProduct = items.find((item) => item._id === product._id);
       if (existingProduct) {
@@ -20,7 +17,6 @@
       return items;
     });
 
-    console.log("Product added to cart");
     goto("/summary");
   }
 </script>

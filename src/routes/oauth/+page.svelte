@@ -3,9 +3,11 @@
   import { useMutation } from "@sveltestack/svelte-query";
   import { onMount } from "svelte";
   import type { Session } from "@supabase/supabase-js";
+  import { user } from "$lib/store/localStorageStore.js";
 
   export let data;
 
+  // Extract session from data
   $: ({ session } = data);
 
   // Define the mutation
@@ -25,7 +27,8 @@
       });
     },
     {
-      onSuccess: () => {
+      onSuccess: (data) => {
+        user.set(data?.data);
         window.location.href = "/";
       },
     }

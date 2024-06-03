@@ -19,3 +19,4 @@ function createLocalStorageStore(key: string, startValue: any) {
 }
 
 export const cart = createLocalStorageStore("cart", []);
+export const user = createLocalStorageStore("user", {});

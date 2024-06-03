@@ -14,9 +14,6 @@
 
   // Use the $ prefix to access the store value reactively
   let cartItems = $cart;
-
-  // Optionally, use the store directly to get the initial value
-  const initialCartItems = get(cart);
 </script>
 
 <div class="max-w-[1280px] mx-auto flex py-5 px-4 gap-8 md:p-10 flex-col">
@@ -34,12 +31,12 @@
 
   <div class="flex gap-6">
     <div class="flex flex-col gap-4 w-8/12">
-      {#each initialCartItems as item, index}
+      {#each cartItems as item, index}
         <Cards {item} />
       {/each}
     </div>
     <div class="w-4/12">
-      <Summary {session} />
+      <Summary {cartItems} />
     </div>
   </div>
 </div>

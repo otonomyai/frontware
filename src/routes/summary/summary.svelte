@@ -1,16 +1,35 @@
 <script lang="ts">
   import { addOrder } from "$lib/apis/order";
   import Button from "$lib/components/ui/button.svelte";
+  import { cart, user } from "$lib/store/localStorageStore";
   import type { Session } from "@supabase/supabase-js";
   import { useMutation } from "@sveltestack/svelte-query";
 
-  export let session: Session;
+  export let cartItems;
 
-  // const mutation = useMutation(async (data) => {
-  //   return addOrder({
-  //     user:
-  //   })
-  // });
+  let userData = $user;
+
+  interface OrderVariables {
+    totalAmount: number;
+  }
+
+  const mutation = useMutation(
+    async ({ totalAmount }: OrderVariables) => {
+      return addOrder({
+        user: userData._id,
+        items: cartItems.map((v: any) => {
+          return { product: v._id, quantity: 1, price: v.price };
+        }),
+        totalAmount,
+      });
+    },
+    {
+      onSuccess: (data) => {
+        // You can handle the success response here
+        console.log("Order successful:", data);
+      },
+    }
+  );
 </script>
 
 <div class="w-full bg-gray-100 rounded-md p-4 flex flex-col gap-8">
@@ -35,7 +54,12 @@
     </span>
   </div>
   <div class="flex flex-col gap-3 justify-center items-center">
-    <Button text="Checkout" callback={() => {}} />
+    <Button
+      text="Checkout"
+      callback={() => {
+        $mutation.mutate({ totalAmount: 400 });
+      }}
+    />
     <p class="text-lg text-gray-400">Secure Checkout</p>
   </div>
 </div>
