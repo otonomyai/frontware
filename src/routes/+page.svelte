@@ -5,6 +5,8 @@
   import Physicsball from "$lib/components/ui/physicsball.svelte";
   import { useQuery } from "@sveltestack/svelte-query";
   import { getProduct } from "$lib/apis/product";
+  import { onMount } from 'svelte';
+  import { writable } from 'svelte/store';
   import type { ProductData, ProductResponse } from "$lib/apis/product";
 
   const productId = "665b2ea351c9fe7ffcc15efc";
@@ -12,6 +14,21 @@
   const productData = useQuery(["product", productId], () =>
     getProduct(productId)
   );
+
+  const isMobile = writable(false);
+
+  onMount(() => {
+    const checkMobile = () => {
+      isMobile.set(window.innerWidth < 768); // Adjust this value based on your responsive breakpoint
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  });
 </script>
 
 <div class="header">
@@ -27,7 +44,9 @@
 
 <div class="container">
   <div class="left">
-    <Physicsball />
+    {#if !$isMobile}
+      <Physicsball />
+    {/if}
   </div>
   <div class="product">
     {#if $productData?.data?.data?._id}
@@ -98,5 +117,20 @@
     height: 100px;
     background-color: #1e375c;
     border-radius: 50%;
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+      padding: 1rem;
+    }
+
+    .left, .product {
+      width: 100%;
+    }
+
+    .product {
+      align-items: center;
+    }
   }
 </style>
