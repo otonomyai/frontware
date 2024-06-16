@@ -15,23 +15,22 @@
     }
   }
 </script>
-
-<div class="w-full card p-4 gap-6 rounded-md flex">
+<div class="w-full card p-4 gap-6 rounded-md flex flex-col md:flex-row">
   <div class="mb-4">
-    <div class="h-44 w-56">
-      <img src={item.images[0]} class="h-full w-full rounded-md" alt="#" />
+    <div class="h-44 w-full md:w-56">
+      <img src={item.images[0]} class="h-full w-full rounded-md object-cover" alt="{item.name}" />
     </div>
   </div>
-  <div class="flex items-center flex-col gap-4">
-    <h3 class="text-3xl">{item.name}</h3>
+  <div class="flex items-center flex-col gap-4 md:items-start md:flex-1">
+    <h3 class="text-2xl md:text-3xl text-center md:text-left">{item.name}</h3>
     <div class="flex gap-4 items-center">
       <button
-        class="flex items-center justify-center text-black text-4xl w-12 h-12 bg-gray-400"
+        class="flex items-center justify-center text-black text-3xl w-10 h-10 md:text-4xl md:w-12 md:h-12 bg-gray-400"
         on:click={decrement}>-</button
       >
-      <span class="count text-4xl">{count}</span>
+      <span class="count text-3xl md:text-4xl">{count}</span>
       <button
-        class="flex items-center justify-center text-black text-4xl w-12 h-12 bg-gray-400"
+        class="flex items-center justify-center text-black text-3xl w-10 h-10 md:text-4xl md:w-12 md:h-12 bg-gray-400"
         on:click={increment}>+</button
       >
     </div>
@@ -43,7 +42,6 @@
     </span>
   </div>
 </div>
-
 <style>
   .card {
     background: #f7f7f7;

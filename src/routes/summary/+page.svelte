@@ -16,26 +16,26 @@
   let cartItems = $cart;
 </script>
 
-<div class="max-w-[1280px] mx-auto flex py-5 px-4 gap-8 md:p-10 flex-col">
+<div class="max-w-[1280px] mx-auto flex flex-col py-5 px-4 gap-8 md:p-10">
   <Header action={() => {}}>
     <div class="flex gap-2 items-end">
       <Icon
         icon="pepicons-pencil:cart"
+        class="cart-icon"
         width="38"
         height="38"
-        class="cart-icon"
       />
-      <p class="text-lg md:text-2xl text-primary">Checkout</p>
+      <p class="hidden md:block text-lg md:text-2xl text-primary">Checkout</p>
     </div>
   </Header>
 
-  <div class="flex gap-6">
-    <div class="flex flex-col gap-4 w-8/12">
+  <div class="flex flex-col gap-6 md:flex-row">
+    <div class="flex flex-col gap-4 w-full md:w-8/12">
       {#each cartItems as item, index}
         <Cards {item} />
       {/each}
     </div>
-    <div class="w-4/12">
+    <div class="w-full md:w-4/12">
       <Summary {cartItems} />
     </div>
   </div>
