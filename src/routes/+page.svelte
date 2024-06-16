@@ -101,24 +101,6 @@
     width: 50%;
   }
 
-  .svg-placeholder {
-    width: 200px;
-    height: 200px;
-    background-color: #ff613f;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1rem;
-  }
-
-  .svg-placeholder div {
-    width: 100px;
-    height: 100px;
-    background-color: #1e375c;
-    border-radius: 50%;
-  }
-
   @media (max-width: 768px) {
     .container {
       flex-direction: column;
